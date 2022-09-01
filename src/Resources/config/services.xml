@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="creative_point_settings.provider.settings_provider" class="CreativePoint\SettingsBundle\Provider\SettingsProvider">
+            <argument type="service" id="cache.app" />
+            <argument type="service" id="creative_point_settings.repository" />
+            <argument type="tagged" tag="creative_point_settings_model" />
+        </service>
+        <service id="CreativePoint\SettingsBundle\Provider\SettingsProvider" alias="creative_point_settings.provider.settings_provider" />
+
+        <service id="creative_point_settings.factory.settings_factory" class="CreativePoint\SettingsBundle\Factory\SettingsFactory">
+            <argument type="service" id="creative_point_settings.repository" />
+            <argument type="service" id="creative_point_settings.provider.settings_provider" />
+            <argument type="service" id="cache.app" />
+        </service>
+        <service id="CreativePoint\SettingsBundle\Factory\SettingsFactory" alias="creative_point_settings.factory.settings_factory" />
+
+        <service id="creative_point_settings.doctrine.metadata_subscriber" class="CreativePoint\SettingsBundle\Doctrine\MetadataSubscriber">
+            <tag name="doctrine.event_subscriber" priority="8000" />
+        </service>
+
+        <service id="creative_point_settings.repository.settings" class="CreativePoint\SettingsBundle\Repository\SettingsRepository">
+            <argument type="service" id="Doctrine\Persistence\ManagerRegistry"/>
+        </service>
+        <service id="creative_point_settings.repository" alias="creative_point_settings.repository.settings" />
+        <service id="CreativePoint\SettingsBundle\Repository\SettingsRepository" alias="creative_point_settings.repository.settings" />
+    </services>
+</container>
