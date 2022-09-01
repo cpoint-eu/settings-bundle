@@ -37,13 +37,11 @@ class SettingsProvider
      */
     public function getSettingsEntity(string $settingId): ?SettingsInterface
     {
-        $settings = $this->repository->findOneBy([
-            'settingsId' => $settingId,
-        ]);
+        $settings = $this->repository->find($settingId);
 
         if (!$settings) {
             $settings = new $this->settingsClass();
-            $settings->setSettingsId($settingId);
+            $settings->setId($settingId);
             $this->repository->add($settings, true);
         }
 

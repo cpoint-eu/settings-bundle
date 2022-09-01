@@ -29,17 +29,17 @@ class SettingsFactoryUnitTest extends TestCase
     public function testUpdateEntityAsArray()
     {
         $settingsEntity = (new Settings())
-            ->setSettingsId('TestSettingsEntity')
+            ->setId('TestSettingsEntity')
             ->setSettings([]);
 
         $this->providerMock->expects($this->once())
             ->method('getSettingsEntity')
-            ->with($settingsEntity->getSettingsId())
+            ->with($settingsEntity->getId())
             ->willReturn($settingsEntity);
 
         $this->providerMock->expects($this->once())
             ->method('getCacheKey')
-            ->with($settingsEntity->getSettingsId())
+            ->with($settingsEntity->getId())
             ->willReturn('settings_TestSettingsEntity');
 
         $this->repositoryMock->expects($this->once())
@@ -51,7 +51,7 @@ class SettingsFactoryUnitTest extends TestCase
             ->with('settings_TestSettingsEntity');
 
         $factory = new SettingsFactory($this->repositoryMock, $this->providerMock, $this->cacheMock);
-        $settings = $factory->setSettingsData($settingsEntity->getSettingsId(), ['foo' => 'bar']);
+        $settings = $factory->setSettingsData($settingsEntity->getId(), ['foo' => 'bar']);
 
         $this->assertInstanceOf(SettingsInterface::class, $settings);
         $this->assertSame(['foo' => 'bar'], $settingsEntity->getSettings());
@@ -60,12 +60,12 @@ class SettingsFactoryUnitTest extends TestCase
     public function testUpdateEntityFromDto()
     {
         $settingsEntity = (new Settings())
-            ->setSettingsId('TestSettingsEntity')
+            ->setId('TestSettingsEntity')
             ->setSettings([]);
 
         $this->providerMock->expects($this->once())
             ->method('getSettingsEntity')
-            ->with($settingsEntity->getSettingsId())
+            ->with($settingsEntity->getId())
             ->willReturn($settingsEntity);
 
         $factory = new SettingsFactory($this->repositoryMock, $this->providerMock, $this->cacheMock);

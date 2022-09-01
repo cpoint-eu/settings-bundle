@@ -11,17 +11,12 @@ interface SettingsInterface
     /**
      * Get Settings ID.
      */
-    public function getId(): mixed;
-
-    /**
-     * Get Settings key.
-     */
-    public function getSettingsId(): ?string;
+    public function getId(): ?string;
 
     /**
      * Set Settings key.
      */
-    public function setSettingsId(string $settingsId): SettingsInterface;
+    public function setId(string $settingsId): SettingsInterface;
 
     /**
      * Get Settings data.

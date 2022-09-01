@@ -45,8 +45,8 @@ class SettingsProviderUnitTest extends TestCase
     public function testGetSettingsEntity(string $settingsId, ?SettingsInterface $settings)
     {
         $this->repositoryMock->expects($this->once())
-            ->method('findOneBy')
-            ->with(['settingsId' => $settingsId])
+            ->method('find')
+            ->with($settingsId)
             ->willReturn($settings);
 
         $provider = new SettingsProvider(
@@ -67,7 +67,7 @@ class SettingsProviderUnitTest extends TestCase
         $settingsEntity = $provider->getSettingsEntity($settingsId);
 
         $this->assertInstanceOf(Settings::class, $settingsEntity);
-        $this->assertSame($settingsEntity->getSettingsId(), $settingsId);
+        $this->assertSame($settingsEntity->getId(), $settingsId);
         $this->assertSame($settingsEntity->getSettings(), []);
     }
 
@@ -108,7 +108,7 @@ class SettingsProviderUnitTest extends TestCase
             ->method('get')
             ->with(sprintf($this->settingsCacheKeyPattern, TestSettingsDto::getSettingsId()))
             ->willReturn((new Settings())
-                ->setSettingsId(TestSettingsDto::getSettingsId())
+                ->setId(TestSettingsDto::getSettingsId())
                 ->setSettings([])
             );
 
@@ -129,7 +129,7 @@ class SettingsProviderUnitTest extends TestCase
     public function getEntitySpecificationTests(): array
     {
         $settingsInDB = (new Settings())
-            ->setSettingsId('testSettingsId')
+            ->setId('testSettingsId')
             ->setSettings([]);
 
         return [

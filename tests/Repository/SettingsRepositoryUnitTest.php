@@ -26,7 +26,7 @@ class SettingsRepositoryUnitTest extends TestCase
     public function testAdd()
     {
         $settings = (new Settings())
-            ->setSettingsId('testSettings');
+            ->setId('testSettings');
 
         $this->registryMock->expects($this->any())
             ->method('getManagerForClass')
@@ -51,7 +51,7 @@ class SettingsRepositoryUnitTest extends TestCase
     public function testRemove()
     {
         $settings = (new Settings())
-            ->setSettingsId('testSettings');
+            ->setId('testSettings');
 
         $this->registryMock->expects($this->any())
             ->method('getManagerForClass')

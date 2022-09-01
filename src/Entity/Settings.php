@@ -6,23 +6,17 @@ namespace CreativePoint\SettingsBundle\Entity;
 
 class Settings implements SettingsInterface
 {
-    private mixed $id = null;
-    private ?string $settingsId = null;
-    private array $settings = [];
+    protected ?string $id = null;
+    protected array $settings = [];
 
-    public function getId(): mixed
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getSettingsId(): ?string
+    public function setId(string $id): self
     {
-        return $this->settingsId;
-    }
-
-    public function setSettingsId(string $settingsId): self
-    {
-        $this->settingsId = $settingsId;
+        $this->id = $id;
 
         return $this;
     }
