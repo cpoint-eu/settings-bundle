@@ -1,6 +1,6 @@
 # Information
 
-CreativePointSettingsBundle manages configurations settings int the database and make them available via DTO objects.
+CreativePointSettingsBundle manages configurations settings in the database and make them available via DTO objects in your Symfony application.
 
 Installation
 ============
