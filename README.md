@@ -87,7 +87,7 @@ class MySettingsDto implements SettingsDtoInterface
     ) {
     }
 
-    public function getSettingsId(): string
+    public static function getSettingsId(): string
     {
         return self::SETTINGS_ID;
     }
