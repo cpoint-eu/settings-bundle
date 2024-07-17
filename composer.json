@@ -1,0 +1,31 @@
+{
+    "name": "cpoint-eu/settings-bundle",
+    "description": "Simple bundle that implements application settings doctrine entity, provider and factory for Symfony project.",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CreativePoint\\SettingsBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CreativePoint\\SettingsBundle\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Milan Hasák",
+            "email": "hasakm@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/framework-bundle": "^7.0",
+        "jms/serializer-bundle": "^4.0 || ^5.0",
+        "symfony/orm-pack": "^2.4"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^6.1"
+    }
+}

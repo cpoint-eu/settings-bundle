@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="CreativePoint\SettingsBundle\Entity\Settings" table="cp_settings">
+        <id name="id" type="string" column="id" length="255" />
+
+        <field name="settings" column="settings" type="json" nullable="true"/>
+    </mapped-superclass>
+</doctrine-mapping>
