@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace CreativePoint\SettingsBundle\DependencyInjection\Compiler;
 
-use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class PersistenceCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    #[NoReturn]
     public function process(ContainerBuilder $container): void
     {
         if ($container->hasExtension(name: 'doctrine')) {
@@ -31,7 +26,7 @@ class PersistenceCompilerPass implements CompilerPassInterface
                             ],
                         ],
                     ],
-                ]
+                ],
             );
         }
     }

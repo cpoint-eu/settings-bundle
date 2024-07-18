@@ -17,7 +17,7 @@ class CreativePointSettingsExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new XmlFileLoader(container: $container, locator: new FileLocator(paths: __DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader(container: $container, locator: new FileLocator(paths: __DIR__ . '/../Resources/config'));
         $loader->load(resource: 'services.xml');
 
         $configuration = $this->getConfiguration(config: $configs, container: $container);

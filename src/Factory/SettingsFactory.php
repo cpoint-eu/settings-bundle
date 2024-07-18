@@ -26,10 +26,13 @@ readonly class SettingsFactory implements SettingsFactoryInterface
     /**
      * Set Settings data and evict cache.
      *
+     * @param array<string, mixed> $settings
+     *
      * @throws InvalidArgumentException
      */
     public function setSettingsData(string $settingsId, array $settings): SettingsInterface
     {
+        /** @var SettingsInterface $settingsEntity */
         $settingsEntity = $this->provider->getSettingsEntity(settingId: $settingsId);
         $settingsEntity->setSettings(settings: $settings);
         $this->repository->add(entity: $settingsEntity, flush: true);
@@ -50,7 +53,10 @@ readonly class SettingsFactory implements SettingsFactoryInterface
         $normalizer = new ObjectNormalizer();
         $serializer = new Serializer(normalizers: [$normalizer]);
 
-        $this->setSettingsData(settingsId: $dto->getSettingsId(), settings: $serializer->normalize(data: $dto));
+        /** @var array<string, mixed> $settings */
+        $settings = $serializer->normalize(data: $dto);
+
+        $this->setSettingsData(settingsId: $dto->getSettingsId(), settings: $settings);
 
         return $dto;
     }

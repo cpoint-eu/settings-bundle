@@ -26,6 +26,8 @@ interface SettingsProviderInterface
 
     /**
      * Load data from array to Settings DTO.
+     *
+     * @param array<string, mixed> $data
      */
     public function loadSettingsDtoFromArray(string $settingId, array $data): SettingsDtoInterface;
 

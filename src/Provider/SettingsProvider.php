@@ -15,6 +15,9 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 readonly class SettingsProvider implements SettingsProviderInterface
 {
+    /**
+     * @param iterable<SettingsDtoInterface> $settingsDtoDefinitions
+     */
     public function __construct(
         private CacheInterface $cache,
         private SettingsRepositoryInterface $repository,
@@ -41,6 +44,7 @@ readonly class SettingsProvider implements SettingsProviderInterface
         $settings = $this->repository->find($settingId);
 
         if (!$settings) {
+            /** @var SettingsInterface $settings */
             $settings = new $this->settingsClass();
             $settings->setId($settingId);
             $this->repository->add(entity: $settings, flush: true);
@@ -56,15 +60,23 @@ readonly class SettingsProvider implements SettingsProviderInterface
      */
     public function getCachedSettings(string $settingId): SettingsInterface
     {
-        return $this->cache->get(key: $this->getCacheKey($settingId), callback: function (ItemInterface $item) use ($settingId) {
+        $settings = $this->cache->get(key: $this->getCacheKey($settingId), callback: function (ItemInterface $item) use ($settingId) {
             $item->expiresAfter(time: $this->settingsCacheTtl);
 
             return $this->getSettingsEntity(settingId: $settingId);
         });
+
+        if (null === $settings) {
+            throw new \InvalidArgumentException(message: 'Settings not found');
+        }
+
+        return $settings;
     }
 
     /**
      * Load data from array to Settings DTO.
+     *
+     * @param array<string, mixed> $data
      *
      * @throws \Exception
      */
@@ -75,7 +87,7 @@ readonly class SettingsProvider implements SettingsProviderInterface
         $normalizer = new ObjectNormalizer();
         $serializer = new Serializer(normalizers: [$normalizer]);
 
-        return $serializer->denormalize(data: $data, type: \get_class($dto));
+        return $serializer->denormalize(data: $data, type: $dto::class);
     }
 
     /**

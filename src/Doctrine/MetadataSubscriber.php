@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace CreativePoint\SettingsBundle\Doctrine;
 
 use CreativePoint\SettingsBundle\Entity\Settings;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 readonly class MetadataSubscriber
 {
+    /**
+     * @param class-string<EntityRepository<Settings>>|null $settingsCustomRepository
+     */
     public function __construct(
         private ?string $settingsModel,
         private ?string $settingsCustomRepository,

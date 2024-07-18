@@ -7,6 +7,10 @@ namespace CreativePoint\SettingsBundle\Entity;
 class Settings implements SettingsInterface
 {
     protected ?string $id = null;
+
+    /**
+     * @var array<string, mixed>
+     */
     protected array $settings = [];
 
     public function getId(): ?string
@@ -21,12 +25,18 @@ class Settings implements SettingsInterface
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array
     {
         return $this->settings;
     }
 
-    public function setSettings(?array $settings): self
+    /**
+     * @param array<string, mixed> $settings
+     */
+    public function setSettings(array $settings): self
     {
         $this->settings = $settings;
 

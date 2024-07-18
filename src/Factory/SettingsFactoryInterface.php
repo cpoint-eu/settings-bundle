@@ -13,6 +13,8 @@ interface SettingsFactoryInterface
     /**
      * Set Settings data and evict cache.
      *
+     * @param array<string, mixed> $settings
+     *
      * @throws InvalidArgumentException
      */
     public function setSettingsData(string $settingsId, array $settings): SettingsInterface;

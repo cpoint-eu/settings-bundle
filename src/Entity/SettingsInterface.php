@@ -16,15 +16,19 @@ interface SettingsInterface
     /**
      * Set Settings key.
      */
-    public function setId(string $settingsId): SettingsInterface;
+    public function setId(string $settingsId): self;
 
     /**
      * Get Settings data.
+     *
+     * @return array<string, mixed>
      */
     public function getSettings(): array;
 
     /**
      * Set Settings data.
+     *
+     * @param array<string, mixed> $settings
      */
-    public function setSettings(?array $settings): SettingsInterface;
+    public function setSettings(array $settings): self;
 }

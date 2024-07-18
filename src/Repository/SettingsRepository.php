@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CreativePoint\SettingsBundle\Repository;
 
 use CreativePoint\SettingsBundle\Entity\SettingsInterface;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method SettingsInterface|null find($id, $lockMode = null, $lockVersion = null)
  * @method SettingsInterface|null findOneBy(array $criteria, array $orderBy = null)
- * @method SettingsInterface[]    findAll()
- * @method SettingsInterface[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SettingsInterface[] findAll()
+ * @method SettingsInterface[] findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class SettingsRepository extends ServiceEntityRepository implements SettingsRepositoryInterface
 {
