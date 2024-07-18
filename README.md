@@ -99,12 +99,12 @@ Save settings data
 
 ```php
 // ...
-use CreativePoint\SettingsBundle\Factory\SettingsFactory;
+use CreativePoint\SettingsBundle\Factory\SettingFactoryInterface;
 
 // ...
 
 // Save settings to the database
-public function saveSettings(SettingFactory $factory)
+public function saveSettings(SettingFactoryInterface $factory)
 {
     // Set data from array
     $factory->setSettingsData('mySettings', [
@@ -133,7 +133,7 @@ use CreativePoint\SettingsBundle\Provider\SettingsProvider;
 // ...
 
 // Save settings to the database
-public function loadSettings(SettingsProvider $provider)
+public function loadSettings(SettingsProviderInterface $provider)
 {
     // Load data from DB by DTO::SETTINGS_ID and return DTO
     $settings = $provider->loadSettingsDto('mySettings');
