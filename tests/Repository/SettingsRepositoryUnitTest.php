@@ -10,12 +10,13 @@ use CreativePoint\SettingsBundle\Repository\SettingsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class SettingsRepositoryUnitTest extends TestCase
 {
-    protected $registryMock;
-    protected $entityManagerMock;
+    protected ?MockObject $registryMock;
+    protected ?MockObject $entityManagerMock;
 
     protected function setUp(): void
     {

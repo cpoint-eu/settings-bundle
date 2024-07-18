@@ -7,14 +7,15 @@ use CreativePoint\SettingsBundle\Entity\SettingsInterface;
 use CreativePoint\SettingsBundle\Model\SettingsDtoInterface;
 use CreativePoint\SettingsBundle\Provider\SettingsProvider;
 use CreativePoint\SettingsBundle\Repository\SettingsRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class SettingsProviderUnitTest extends TestCase
 {
-    private $cacheMock;
-    private $repositoryMock;
-    private $settingsCacheKeyPattern = 'settings_%s';
+    private ?MockObject $cacheMock;
+    private ?MockObject $repositoryMock;
+    private ?MockObject $settingsCacheKeyPattern = 'settings_%s';
 
     public function setUp(): void
     {
