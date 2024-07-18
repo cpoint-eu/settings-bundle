@@ -31,9 +31,13 @@ class SettingsRepositoryUnitTest extends TestCase
         $this->registryMock->expects($this->any())
             ->method('getManagerForClass')
             ->willReturn($this->entityManagerMock);
+
+        $classMetadataMock = $this->createMock(ClassMetadata::class);
+        $classMetadataMock->name = Settings::class;
+
         $this->entityManagerMock->expects($this->any())
             ->method('getClassMetadata')
-            ->willReturn($this->createMock(ClassMetadata::class));
+            ->willReturn($classMetadataMock);
 
         $repository = new SettingsRepository($this->registryMock, SettingsInterface::class);
 
@@ -56,9 +60,13 @@ class SettingsRepositoryUnitTest extends TestCase
         $this->registryMock->expects($this->any())
             ->method('getManagerForClass')
             ->willReturn($this->entityManagerMock);
+
+        $classMetadataMock = $this->createMock(ClassMetadata::class);
+        $classMetadataMock->name = Settings::class;
+
         $this->entityManagerMock->expects($this->any())
             ->method('getClassMetadata')
-            ->willReturn($this->createMock(ClassMetadata::class));
+            ->willReturn($classMetadataMock);
 
         $repository = new SettingsRepository($this->registryMock, SettingsInterface::class);
 
@@ -77,7 +85,7 @@ class SettingsRepositoryUnitTest extends TestCase
     {
         parent::tearDown();
 
-        $this->reistryMock = null;
+        $this->registryMock = null;
         $this->entityManagerMock = null;
     }
 }

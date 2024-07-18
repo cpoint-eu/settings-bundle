@@ -7,9 +7,9 @@ namespace CreativePoint\SettingsBundle\Provider;
 use CreativePoint\SettingsBundle\Entity\SettingsInterface;
 use CreativePoint\SettingsBundle\Model\SettingsDtoInterface;
 use CreativePoint\SettingsBundle\Repository\SettingsRepositoryInterface;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
-use JMS\Serializer\SerializerBuilder;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -72,11 +72,10 @@ readonly class SettingsProvider implements SettingsProviderInterface
     {
         $dto = $this->createSettingsDto(dtoName: $settingId);
 
-        $serializerBuilder = SerializerBuilder::create();
-        $serializerBuilder->setPropertyNamingStrategy(propertyNamingStrategy: new IdenticalPropertyNamingStrategy());
-        $serializer = $serializerBuilder->build();
+        $normalizer = new ObjectNormalizer();
+        $serializer = new Serializer(normalizers: [$normalizer]);
 
-        return $serializer->fromArray(data: $data, type: \get_class($dto));
+        return $serializer->denormalize(data: $data, type: \get_class($dto));
     }
 
     /**

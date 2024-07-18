@@ -12,6 +12,7 @@ use CreativePoint\SettingsBundle\Provider\SettingsProvider;
 use CreativePoint\SettingsBundle\Repository\SettingsRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
+use Zfekete\BypassReadonly\BypassReadonly;
 
 class SettingsFactoryUnitTest extends TestCase
 {
@@ -21,8 +22,10 @@ class SettingsFactoryUnitTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->repositoryMock = $this->createMock(SettingsRepository::class);
+        BypassReadonly::enable();
+
         $this->providerMock = $this->createMock(SettingsProvider::class);
+        $this->repositoryMock = $this->createMock(SettingsRepository::class);
         $this->cacheMock = $this->createMock(CacheInterface::class);
     }
 

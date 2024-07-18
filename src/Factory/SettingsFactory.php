@@ -8,9 +8,10 @@ use CreativePoint\SettingsBundle\Entity\SettingsInterface;
 use CreativePoint\SettingsBundle\Model\SettingsDtoInterface;
 use CreativePoint\SettingsBundle\Provider\SettingsProvider;
 use CreativePoint\SettingsBundle\Repository\SettingsRepositoryInterface;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
-use JMS\Serializer\SerializerBuilder;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Cache\CacheInterface;
 
 readonly class SettingsFactory implements SettingsFactoryInterface
@@ -42,14 +43,14 @@ readonly class SettingsFactory implements SettingsFactoryInterface
      * Set Settings data from DTO and evict cache.
      *
      * @throws InvalidArgumentException
+     * @throws ExceptionInterface
      */
     public function setSettingsDataFromDto(SettingsDtoInterface $dto): SettingsDtoInterface
     {
-        $serializerBuilder = SerializerBuilder::create();
-        $serializerBuilder->setPropertyNamingStrategy(propertyNamingStrategy: new IdenticalPropertyNamingStrategy());
-        $serializer = $serializerBuilder->build();
+        $normalizer = new ObjectNormalizer();
+        $serializer = new Serializer(normalizers: [$normalizer]);
 
-        $this->setSettingsData(settingsId: $dto->getSettingsId(), settings: $serializer->toArray($dto));
+        $this->setSettingsData(settingsId: $dto->getSettingsId(), settings: $serializer->normalize(data: $dto));
 
         return $dto;
     }
