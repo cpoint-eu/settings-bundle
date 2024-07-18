@@ -10,23 +10,24 @@ use CreativePoint\SettingsBundle\Factory\SettingsFactory;
 use CreativePoint\SettingsBundle\Model\SettingsDtoInterface;
 use CreativePoint\SettingsBundle\Provider\SettingsProvider;
 use CreativePoint\SettingsBundle\Repository\SettingsRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Cache\CacheInterface;
 use Zfekete\BypassReadonly\BypassReadonly;
 
 class SettingsFactoryUnitTest extends TestCase
 {
-    private $repositoryMock;
-    private $providerMock;
-    private $cacheMock;
+    private ?MockObject $repositoryMock;
+    private ?MockObject $providerMock;
+    private ?MockObject $cacheMock;
 
     protected function setUp(): void
     {
         BypassReadonly::enable();
 
-        $this->providerMock = $this->createMock(SettingsProvider::class);
-        $this->repositoryMock = $this->createMock(SettingsRepository::class);
-        $this->cacheMock = $this->createMock(CacheInterface::class);
+        $this->providerMock = $this->createMock(originalClassName: SettingsProvider::class);
+        $this->repositoryMock = $this->createMock(originalClassName: SettingsRepository::class);
+        $this->cacheMock = $this->createMock(originalClassName: CacheInterface::class);
     }
 
     public function testUpdateEntityAsArray()
