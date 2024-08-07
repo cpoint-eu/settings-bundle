@@ -15,7 +15,7 @@ class SettingsProviderUnitTest extends TestCase
 {
     private ?MockObject $cacheMock;
     private ?MockObject $repositoryMock;
-    private ?MockObject $settingsCacheKeyPattern = 'settings_%s';
+    private ?string $settingsCacheKeyPattern = 'settings_%s';
 
     public function setUp(): void
     {
