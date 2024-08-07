@@ -30,7 +30,7 @@ class SettingsFactoryUnitTest extends TestCase
         $this->cacheMock = $this->createMock(originalClassName: CacheInterface::class);
     }
 
-    public function testUpdateEntityAsArray()
+    public function testUpdateEntityAsArray(): void
     {
         $settingsEntity = (new Settings())
             ->setId('TestSettingsEntity')
