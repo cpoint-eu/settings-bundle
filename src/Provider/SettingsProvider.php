@@ -117,6 +117,6 @@ readonly class SettingsProvider implements SettingsProviderInterface
             }
         }
 
-        throw new \Exception(\sprintf('No Settings definition for name %s', $dtoName));
+        throw new \InvalidArgumentException(\sprintf('No Settings definition for name %s', $dtoName));
     }
 }
